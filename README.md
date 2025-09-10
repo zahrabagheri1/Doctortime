@@ -1,5 +1,7 @@
 # Doctortime
-DocTime is a web application for booking doctor appointments. It allows users to easily schedule, view, and manage appointments. The platform supports three types of users: Customers (patients), Doctors, and Admins, each with their own access and features.
+DocTime is a web application for booking doctor appointments. It allows users to easily schedule, view, and manage appointments. The platform supports three types of users: Customers (patients), Doctors, and Admins, each with their own access and features. 
+
+- LINK: www.doctortime.doc
 
 ## Features
 - Register / Login users
