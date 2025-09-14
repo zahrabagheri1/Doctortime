@@ -13,8 +13,8 @@ import doc9 from './imgs/doctors/LaylaHassan.jpg'
 import doc10 from './imgs/doctors/SaraCollins.jpg'
 import doc11 from './imgs/doctors/YasminFarah.jpg'
 import doc12 from './imgs/doctors/HannahLee.jpg'
-import headerpic from './imgs/headerpic.png';
-import groupprofile from './imgs/group-profiles.png';
+import headerpic from './imgs/headerpic.png'
+import groupprofile from './imgs/group-profiles.png'
 import profilepic from './imgs/profiles/profile-five.png'
 import chatIcon from './imgs/icons/chat-icon.png'
 import verifiedIcon from './imgs/icons/verified-icon.png'
@@ -24,6 +24,20 @@ import menuIcon from './imgs/icons/menu-icon.png'
 import crossIcon from './imgs/icons/cross-icon.png'
 import dropdownIcon from './imgs/icons/dropdown-icon.png'
 import uploadIcon from './imgs/icons/upload-icon.png'
+import Cardiology from './imgs/speciality/stomach.png'
+import Ophthalmology from './imgs/speciality/eye.png'
+import Gynecology from './imgs/speciality/ear.png'
+import Otolaryngology from './imgs/speciality/dna.png'
+import Gastroenterology from './imgs/speciality/Gastroenterology.png'
+import Dentistry from './imgs/speciality/Dentistry.png'
+import Dermatology from './imgs/speciality/Dentistry.png'
+import Orthopedics from './imgs/speciality/Dentistry.png'
+import Neurology from './imgs/speciality/Dentistry.png'
+import Pediatrics from './imgs/speciality/Dentistry.png'
+import Endocrinology from './imgs/speciality/Dentistry.png'
+import Pulmonology from './imgs/speciality/Dentistry.png'
+import Urology from './imgs/speciality/Dentistry.png'
+import Psychiatry from './imgs/speciality/Dentistry.png'
 
 export const assets = {
     doctimelogo,
@@ -44,7 +58,62 @@ export const assets = {
 
 
 export const specialityData = [
-
+    {
+        speciality: "Ophthalmology",
+        image: Ophthalmology
+    },
+    {
+        speciality: "Gynecology",
+        image: Gynecology
+    },
+    {
+        speciality: "Gastroenterology",
+        image: Gastroenterology
+    },
+    {
+        speciality: "Otolaryngology",
+        image: Otolaryngology
+    },
+    {
+        speciality: "Dentistry",
+        image: Dentistry
+    },
+    {
+        speciality: "Cardiology",
+        image: Cardiology
+    },
+    {
+        speciality: "Endocrinology",
+        image: Endocrinology
+    },
+    {
+        speciality: "Urology",
+        image: Urology
+    },
+    {
+        speciality: "Pulmonology",
+        image: Pulmonology
+    },
+    {
+        speciality: "Pediatrics",
+        image: Pediatrics
+    },
+    {
+        speciality: "Psychiatry",
+        image: Psychiatry
+    },
+    {
+        speciality: "Neurology",
+        image: Neurology
+    },
+    {
+        speciality: "Orthopedics",
+        image: Orthopedics
+    },
+    {
+        speciality: "Dermatology",
+        image: Dermatology
+    }
 ]
 
 
