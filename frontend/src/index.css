@@ -4,17 +4,31 @@
   --font-display: "Satoshi", "sans-serif";
   --breakpoint-3xl: 1920px;
 
+  --color-primary: #4e7ab5;
+  --color-secondary: #8bb7f0;
+  --color-three: #5e9c76;
+  --color-four: #99c99e;
+  --grid-auto-fill-200: repeat(auto-fill, minmax(200px, 1fr));
+  --grid-auto-fill-400: repeat(auto-fill, minmax(400px, 1fr));
 
-  --color-primary: #4E7AB5;
-  --color-secondary: #8BB7F0;
-  --color-three: #5E9C76;
-  --color-four: #99C99E;
+  /* grid-template-columns: {'auto':'repeat(auto-fill, minmsx(200px,1fr))'}; */
 }
+@layer utilities {
+  .grid-auto-fill-200 {
+    display: grid;
+    grid-template-columns: var(--grid-auto-fill-200);
+  }
+  .grid-auto-fill-400 {
+    display: grid;
+    grid-template-columns: var(--grid-auto-fill-400);
+  }
+}
+
 
 .active hr {
-  @apply block
+  @apply block;
 }
 
-::-webkit-scrollbar{
-  @apply hidden
+::-webkit-scrollbar {
+  @apply hidden;
 }

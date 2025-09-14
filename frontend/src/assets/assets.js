@@ -3,16 +3,16 @@ import doctimelogo from './imgs/doctimelogo.png'
 import doctimelogotype from './imgs/doctimelogologotype.png'
 import doc1 from './imgs/doctors/DineshPalipana.jpg'
 import doc2 from './imgs/doctors/BradMcKay.jpg'
-import doc3 from './imgs/doctors/MukeshHaikerwal.jpg'
+import doc3 from './imgs/doctors/MukeshHaikerwal.png'
 import doc4 from './imgs/doctors/NormanSwan.jpg'
 import doc5 from './imgs/doctors/BenjaminScott.jpg'
-import doc6 from './imgs/doctors/MohammadMutahar.jpeg'
-import doc7 from './imgs/doctors/ChloeSaadeKorban.jpeg'
-import doc8 from './imgs/doctors/YusofMutahar.jpg'
+import doc6 from './imgs/doctors/MohammadMutahar.jpg'
+import doc7 from './imgs/doctors/ChloeSaadeKorban.jpg'
+import doc8 from './imgs/doctors/YusofMutahar.png'
 import doc9 from './imgs/doctors/LaylaHassan.jpg'
 import doc10 from './imgs/doctors/SaraCollins.jpg'
 import doc11 from './imgs/doctors/YasminFarah.jpg'
-import doc12 from './imgs/doctors/HannahLee.jpg'
+import doc12 from './imgs/doctors/HannahLee.png'
 import headerpic from './imgs/headerpic.png'
 import groupprofile from './imgs/group-profiles.png'
 import profilepic from './imgs/profiles/profile-five.png'
@@ -38,6 +38,10 @@ import Endocrinology from './imgs/speciality/Dentistry.png'
 import Pulmonology from './imgs/speciality/Dentistry.png'
 import Urology from './imgs/speciality/Dentistry.png'
 import Psychiatry from './imgs/speciality/Dentistry.png'
+import profileOne from './imgs/profiles/profile-one.png'
+import profileTwo from './imgs/profiles/profile-two.png'
+import profileThree from './imgs/profiles/profile-three.png'
+import ratingStar from './imgs/star.png'
 
 export const assets = {
     doctimelogo,
@@ -54,6 +58,7 @@ export const assets = {
     crossIcon,
     dropdownIcon,
     uploadIcon,
+    ratingStar
 }
 
 
@@ -86,34 +91,34 @@ export const specialityData = [
         speciality: "Endocrinology",
         image: Endocrinology
     },
-    {
-        speciality: "Urology",
-        image: Urology
-    },
-    {
-        speciality: "Pulmonology",
-        image: Pulmonology
-    },
-    {
-        speciality: "Pediatrics",
-        image: Pediatrics
-    },
-    {
-        speciality: "Psychiatry",
-        image: Psychiatry
-    },
-    {
-        speciality: "Neurology",
-        image: Neurology
-    },
-    {
-        speciality: "Orthopedics",
-        image: Orthopedics
-    },
-    {
-        speciality: "Dermatology",
-        image: Dermatology
-    }
+    // {
+    //     speciality: "Urology",
+    //     image: Urology
+    // },
+    // {
+    //     speciality: "Pulmonology",
+    //     image: Pulmonology
+    // },
+    // {
+    //     speciality: "Pediatrics",
+    //     image: Pediatrics
+    // },
+    // {
+    //     speciality: "Psychiatry",
+    //     image: Psychiatry
+    // },
+    // {
+    //     speciality: "Neurology",
+    //     image: Neurology
+    // },
+    // {
+    //     speciality: "Orthopedics",
+    //     image: Orthopedics
+    // },
+    // {
+    //     speciality: "Dermatology",
+    //     image: Dermatology
+    // }
 ]
 
 
@@ -288,4 +293,41 @@ export const doctors = [
     }
 
 
+]
+
+
+export const usersFeedbacks = [
+    {
+        id: 1,
+        name: "Sarah Johnson",
+        role: "Cardiologist",
+        image: profileOne,
+        feedback:
+            "DoctorTime has made it so much easier for my patients to book appointments. The platform is reliable and user-friendly.",
+        rating: 5,
+        date: "2025-09-01",
+        location: "Melbourne, Australia",
+    },
+    {
+        id: 2,
+        name: "Michael Brown",
+        role: "Patient",
+        image: profileThree,
+        feedback:
+            "I booked my appointment in less than a minute. No waiting calls or emails – just quick and easy!",
+        rating: 4,
+        date: "2025-08-27",
+        location: "Sydney, Australia",
+    },
+    {
+        id: 3,
+        name: "Emily Davis",
+        role: "Dermatologist",
+        image: profileTwo,
+        feedback:
+            "The platform helps me manage my schedule more efficiently, and my patients love the reminders.",
+        rating: 5,
+        date: "2025-09-10",
+        location: "Brisbane, Australia",
+    },
 ]
