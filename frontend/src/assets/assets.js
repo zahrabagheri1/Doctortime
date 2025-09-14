@@ -1,5 +1,6 @@
 import doctorappointment from './imgs/docappointment.png'
-import doctimelogo from './imgs/doctimelogo.jpg'
+import doctimelogo from './imgs/doctimelogo.png'
+import doctimelogotype from './imgs/doctimelogologotype.png'
 import doc1 from './imgs/doctors/DineshPalipana.jpg'
 import doc2 from './imgs/doctors/BradMcKay.jpg'
 import doc3 from './imgs/doctors/MukeshHaikerwal.jpg'
@@ -12,7 +13,9 @@ import doc9 from './imgs/doctors/LaylaHassan.jpg'
 import doc10 from './imgs/doctors/SaraCollins.jpg'
 import doc11 from './imgs/doctors/YasminFarah.jpg'
 import doc12 from './imgs/doctors/HannahLee.jpg'
-import profilepic from './imgs/profilepic.jpg'
+import headerpic from './imgs/headerpic.png';
+import groupprofile from './imgs/group-profiles.png';
+import profilepic from './imgs/profiles/profile-five.png'
 import chatIcon from './imgs/icons/chat-icon.png'
 import verifiedIcon from './imgs/icons/verified-icon.png'
 import infoIcon from './imgs/icons/info-icon.png'
@@ -24,7 +27,10 @@ import uploadIcon from './imgs/icons/upload-icon.png'
 
 export const assets = {
     doctimelogo,
+    doctimelogotype,
     doctorappointment,
+    headerpic,
+    groupprofile,
     profilepic,
     chatIcon,
     verifiedIcon,
