@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@theme {
+  --font-display: "Satoshi", "sans-serif";
+  --breakpoint-3xl: 1920px;
+
+
+  --color-primary: #4E7AB5;
+  --color-secondary: #8BB7F0;
+  --color-three: #5E9C76;
+  --color-four: #99C99E;
+}
+
+.active hr {
+  @apply block
+}

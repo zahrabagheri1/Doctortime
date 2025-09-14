@@ -5,30 +5,40 @@ import doc2 from './imgs/doctors/BradMcKay.jpg'
 import doc3 from './imgs/doctors/MukeshHaikerwal.jpg'
 import doc4 from './imgs/doctors/NormanSwan.jpg'
 import doc5 from './imgs/doctors/BenjaminScott.jpg'
-import doc6 from './imgs/doctors/MohammadMutahar.jpg'
-import doc7 from './imgs/doctors/ChloeSaadeKorban.jpg'
+import doc6 from './imgs/doctors/MohammadMutahar.jpeg'
+import doc7 from './imgs/doctors/ChloeSaadeKorban.jpeg'
 import doc8 from './imgs/doctors/YusofMutahar.jpg'
 import doc9 from './imgs/doctors/LaylaHassan.jpg'
 import doc10 from './imgs/doctors/SaraCollins.jpg'
 import doc11 from './imgs/doctors/YasminFarah.jpg'
 import doc12 from './imgs/doctors/HannahLee.jpg'
-
+import profilepic from './imgs/profilepic.jpg'
+import chatIcon from './imgs/icons/chat-icon.png'
+import verifiedIcon from './imgs/icons/verified-icon.png'
+import infoIcon from './imgs/icons/info-icon.png'
+import arrowIcon from './imgs/icons/arrow-icon.png'
+import menuIcon from './imgs/icons/menu-icon.png'
+import crossIcon from './imgs/icons/cross-icon.png'
+import dropdownIcon from './imgs/icons/dropdown-icon.png'
+import uploadIcon from './imgs/icons/upload-icon.png'
 
 export const assets = {
     doctimelogo,
     doctorappointment,
+    profilepic,
+    chatIcon,
+    verifiedIcon,
+    infoIcon,
+    arrowIcon,
+    menuIcon,
+    crossIcon,
+    dropdownIcon,
+    uploadIcon,
 }
 
 
 export const specialityData = [
-    {
-        speciality: 'doctor time logo',
-        image: doctimelogo
-    },
-    {
-        speciality: 'doctor appointment',
-        image: doctorappointment
-    },
+
 ]
 
 
