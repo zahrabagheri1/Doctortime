@@ -38,6 +38,8 @@ const Footer = () => {
           </ul>
         </div>
       </div>
+
+      {/* COPY Right Section */}
       <hr/>
       <div className="py-5 text-sm text-center" >Copyright © 2025 zahrabagheri - All Right Reserved.</div>
     </div>

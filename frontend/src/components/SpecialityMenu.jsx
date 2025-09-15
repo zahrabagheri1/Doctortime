@@ -22,7 +22,7 @@ const SpecialityMenu = () => {
             key={index}
             to={`/doctors/${item.speciality}`}
           >
-            <div className="w-25 bg-four  flex  items-center justify-center p-3 rounded-full">
+            <div className="w-25 bg-primary  flex  items-center justify-center p-3 rounded-full">
               <img
                 src={item.image}
                 className="w-16 sm:w-24  md-2"

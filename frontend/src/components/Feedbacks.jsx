@@ -1,5 +1,5 @@
 import React from "react";
-import { assets, usersFeedbacks } from "../assets/assets";
+import { usersFeedbacks } from "../assets/assets";
 
 const Feedbacks = () => {
   return (
@@ -13,7 +13,7 @@ const Feedbacks = () => {
         {usersFeedbacks.slice(0, 6).map((item, index) => (
           <div
             key={index}
-            className="p-3 w-3 sm:w-full border border-blue-200 rounded-xl bg-four"
+            className="p-3 w-3 sm:w-full border border-blue-200 rounded-xl bg-third"
           >
             <div className="flex flex-row items-center ">
               <img
@@ -22,8 +22,8 @@ const Feedbacks = () => {
                 className="w-30 lg:w-25 md:w-20 sm:w-20 rounded-full"
               />
               <div>
-                <p className="text-xl text-gray-950 font-bold">{item.name}</p>
-                <p className="text-sm text-gray-800">{item.role}</p>
+                <p className="text-xl text-white font-bold">{item.name}</p>
+                <p className="text-sm text-gray-200">{item.role}</p>
 
                 {/* <div className=" flex flex-row">
                   {[...Array(item.rating)].map((e, index) => (

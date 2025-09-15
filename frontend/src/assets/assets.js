@@ -1,4 +1,4 @@
-import doctorappointment from './imgs/docappointment.png'
+import doctorappointment from './imgs/appointment.png'
 import doctimelogo from './imgs/doctimelogo.png'
 import doctimelogotype from './imgs/doctimelogologotype.png'
 import doc1 from './imgs/doctors/DineshPalipana.jpg'

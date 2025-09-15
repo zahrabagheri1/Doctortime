@@ -1,19 +1,31 @@
 @import "tailwindcss";
 
-@theme {
-  --font-display: "Satoshi", "sans-serif";
-  --breakpoint-3xl: 1920px;
 
+@font-face {
+  font-family: "MyFont";
+  /* src: url("/src/assets/fonts/ArchivoBlack-Regular.ttf"); */
+  src: url("/src/assets/fonts/WinkyRough-VariableFont_wght.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@theme {
+  /* --font-display: "Satoshi", "sans-serif"; */
+  --breakpoint-3xl: 1920px;
+  
   --color-primary: #4e7ab5;
   --color-secondary: #8bb7f0;
-  --color-three: #5e9c76;
-  --color-four: #99c99e;
+  --color-third: #5e9c76;
+  --color-fourth: #99c99e;
   --grid-auto-fill-200: repeat(auto-fill, minmax(200px, 1fr));
   --grid-auto-fill-400: repeat(auto-fill, minmax(400px, 1fr));
-
+  
   /* grid-template-columns: {'auto':'repeat(auto-fill, minmsx(200px,1fr))'}; */
 }
+
 @layer utilities {
+  *{
+    font-family: 'MyFont';
+  }
   .grid-auto-fill-200 {
     display: grid;
     grid-template-columns: var(--grid-auto-fill-200);
@@ -23,6 +35,7 @@
     grid-template-columns: var(--grid-auto-fill-400);
   }
 }
+
 
 
 .active hr {

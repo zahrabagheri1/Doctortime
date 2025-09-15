@@ -23,7 +23,7 @@ const TopDocters = () => {
             <img
               src={item.image}
               alt={item.name}
-              className="bg-three w-full h-8/12"
+              className="bg-white w-full h-8/12"
             />
 
             <div className="p-4">
@@ -42,7 +42,7 @@ const TopDocters = () => {
           navigate("doctors");
           scrollTo(0, 0);
         }}
-        className="bg-four text-gray-600 px-12 py-3 rounded-full mt-5 cursor-pointer"
+        className="bg-secondary text-gray-800 px-12 py-3 rounded-full mt-5 cursor-pointer"
       >
         More
       </button>
