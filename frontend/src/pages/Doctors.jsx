@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
+import { specialityData } from "../assets/assets";
 
 const Doctors = () => {
   const { speciality } = useParams();
@@ -22,78 +23,21 @@ const Doctors = () => {
       <p className="text-gray-600">Browse through the doctors specialist.</p>
       <div className="flex flex-col sm:flex-row items-start gap-5 mt-5">
         <div className="flex flex-col gap-2 text-sm text-gray-600">
-          <p
-            onClick={() =>
-              speciality === "Dentistry"
-                ? navigate("/doctors")
-                : navigate("/doctors/Dentistry")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-              speciality === "Dentistry" ? "bg-blue-100 text-black" : ""
-            }`}
-          >
-            Dentistry
-          </p>
-          <p
-            onClick={() =>
-              speciality === "Cardiology"
-                ? navigate("/doctors")
-                : navigate("/doctors/Cardiology")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-              speciality === "Cardiology" ? "bg-blue-100 text-black" : ""
-            }`}
-          >
-            Cardiology
-          </p>
-          <p
-            onClick={() =>
-              speciality === "Otolaryngology"
-                ? navigate("/doctors")
-                : navigate("/doctors/Otolaryngology")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-              speciality === "Otolaryngology" ? "bg-blue-100 text-black" : ""
-            }`}
-          >
-            Otolaryngology
-          </p>
-          <p
-            onClick={() =>
-              speciality === "Gastroenterology"
-                ? navigate("/doctors")
-                : navigate("/doctors/Gastroenterology")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-              speciality === "Gastroenterology" ? "bg-blue-100 text-black" : ""
-            }`}
-          >
-            Gastroenterology
-          </p>
-          <p
-            onClick={() =>
-              speciality === "Gynecology"
-                ? navigate("/doctors")
-                : navigate("/doctors/Gynecology")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-              speciality === "Gynecology" ? "bg-blue-100 text-black" : ""
-            }`}
-          >
-            Gynecology
-          </p>
-          <p
-            onClick={() =>
-              speciality === "Endocrinology"
-                ? navigate("/doctors")
-                : navigate("/doctors/Endocrinology")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-              speciality === "" ? "bg-blue-100 text-black" : ""
-            }`}
-          >
-            Endocrinology
-          </p>
+          {specialityData.map((sep, index) => (
+            <p
+            key={index}
+              onClick={() =>
+                speciality === sep.speciality
+                  ? navigate("/doctors")
+                  : navigate(`/doctors/${sep.speciality}`)
+              }
+              className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
+                speciality === sep.speciality ? "bg-blue-100 text-black" : ""
+              }`}
+            >
+              {sep.speciality}
+            </p>
+          ))}
         </div>
 
         <div className="w-full grid grid-cols-auto grid-auto-fill-200 gap-4">

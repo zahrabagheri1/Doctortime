@@ -15,7 +15,7 @@ const SpecialityMenu = () => {
       </p>
 
       <div className="flex sm:justify-center gap-4 pt-5 w-full overflow-scroll">
-        {specialityData.map((item, index) => (
+        {specialityData.slice(0,7).map((item, index) => (
           <Link
             onClick={() => scrollTo(0, 0)}
             className="flex flex-col items-center justufy-center cursor-pointer flex-shrink-0 text-xs hover:translate-y-[-10px] transition-all duration-500"

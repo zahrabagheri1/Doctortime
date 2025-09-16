@@ -81,63 +81,33 @@ export const assets = {
 
 
 export const specialityData = [
-    {
-        speciality: "Ophthalmology",
-        image: Ophthalmology
-    },
-    {
-        speciality: "Gynecology",
-        image: Gynecology
-    },
-    {
-        speciality: "Gastroenterology",
-        image: Gastroenterology
-    },
-    {
-        speciality: "Otolaryngology",
-        image: Otolaryngology
-    },
-    {
-        speciality: "Dentistry",
-        image: Dentistry
-    },
-    {
-        speciality: "Cardiology",
-        image: Cardiology
-    },
-    {
-        speciality: "Endocrinology",
-        image: Endocrinology
-    },
-    // {
-    //     speciality: "Urology",
-    //     image: Urology
-    // },
-    // {
-    //     speciality: "Pulmonology",
-    //     image: Pulmonology
-    // },
-    // {
-    //     speciality: "Pediatrics",
-    //     image: Pediatrics
-    // },
-    // {
-    //     speciality: "Psychiatry",
-    //     image: Psychiatry
-    // },
-    // {
-    //     speciality: "Neurology",
-    //     image: Neurology
-    // },
-    // {
-    //     speciality: "Orthopedics",
-    //     image: Orthopedics
-    // },
-    // {
-    //     speciality: "Dermatology",
-    //     image: Dermatology
-    // }
+    { speciality: "General Practice", image:  Dermatology},
+    { speciality: "Ophthalmology", image: Ophthalmology },
+    { speciality: "Gynecology", image: Gynecology },
+    { speciality: "Gastroenterology", image: Gastroenterology },
+    { speciality: "Otolaryngology (ENT)", image: Otolaryngology },
+    { speciality: "Dentistry", image: Dentistry },
+    { speciality: "Cardiology", image: Cardiology },
+    { speciality: "Endocrinology", image: Endocrinology },
+    { speciality: "Urology", image: Urology },
+    { speciality: "Pulmonology", image: Pulmonology },
+    { speciality: "Pediatrics", image: Pediatrics },
+    { speciality: "Psychiatry", image: Psychiatry },
+    { speciality: "Neurology", image: Neurology },
+    { speciality: "Orthopedics", image: Orthopedics },
+    { speciality: "Dermatology", image: Dermatology },
+    // { speciality: "Oncology", image: "Oncology" },
+    // { speciality: "Rheumatology", image: "Rheumatology" },
+    // { speciality: "Nephrology", image: "Nephrology" },
+    // { speciality: "Hematology", image: "Hematology" },
+    // { speciality: "Radiology", image: "Radiology" },
+    // { speciality: "Anesthesiology", image: "Anesthesiology" },
+    // { speciality: "Emergency Medicine", image: "EmergencyMedicine" },
+    // { speciality: "Infectious Diseases", image: 'InfectiousDiseases' },
+    // { speciality: "Geriatrics", image: "Geriatrics" },
+    // { speciality: "Sports Medicine", image: "SportsMedicine" }
 ]
+
 
 
 export const doctors = [
