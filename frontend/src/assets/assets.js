@@ -90,6 +90,8 @@ import profileOne from './imgs/profiles/profile-one.png'
 import profileTwo from './imgs/profiles/profile-two.png'
 import profileThree from './imgs/profiles/profile-three.png'
 import ratingStar from './imgs/star.png'
+import aboutus from './imgs/about.jpg'
+import contactus from './imgs/contact.jpg'
 
 export const assets = {
     doctimelogo,
@@ -106,7 +108,9 @@ export const assets = {
     crossIcon,
     dropdownIcon,
     uploadIcon,
-    ratingStar
+    ratingStar,
+    aboutus,
+    contactus
 }
 
 
