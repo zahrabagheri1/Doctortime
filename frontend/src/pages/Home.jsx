@@ -1,11 +1,20 @@
-import React from 'react'
+import React from "react";
+import Header from "../components/Header";
+import SpecialityMenu from "../components/SpecialityMenu";
+import TopDocters from "../components/TopDocters";
+import Banner from "../components/Banner";
+import Feedbacks from "../components/Feedbacks";
 
 const Home = () => {
   return (
     <div>
-        that is home page
+      <Header />
+      <SpecialityMenu />
+      <TopDocters />
+      <Banner />
+      {/* <Feedbacks/> */}
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
