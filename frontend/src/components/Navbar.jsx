@@ -72,6 +72,52 @@ const Navbar = () => {
             Create account
           </button>
         )}
+
+        <img
+          src={assets.menuIcon}
+          onClick={() => setShowMenu(true)}
+          alt="menuIcon"
+          className="w-6 md:hidden"
+        />
+
+        {/* Mobile Menu */}
+        <div
+          className={`${
+            showMenu ? "fixed w-full" : "h-0 w-0 hidden"
+          } md:hidden right-0 top-0 bottom-0 z-20 bg-white transition-all`}
+        >
+          <div className="flex items-center justify-between px-5 py-6">
+            <img className="w-36" src={assets.doctimelogotype} alt="" />
+            <img
+              className="w-7"
+              onClick={() => setShowMenu(false)}
+              src={assets.crossIcon}
+              alt=""
+            />
+          </div>
+          <ul className="flex flex-col items-center font-medium gap2 mt-5 text-lg">
+            <NavLink onClick={() => setShowMenu(false)} to="/">
+              <p className="px-4 py-2 rounded inline-block hover:text-primary hover:font-bold hover:text-2xl transition-all duration-100">
+                Home
+              </p>
+            </NavLink>
+            <NavLink onClick={() => setShowMenu(false)} to="doctors">
+              <p className="px-4 py-2 rounded inline-block hover:text-primary hover:font-bold hover:text-2xl transition-all duration-100">
+                All Doctors
+              </p>
+            </NavLink>
+            <NavLink onClick={() => setShowMenu(false)} to="about">
+              <p className="px-4 py-2 rounded inline-block hover:text-primary hover:font-bold hover:text-2xl transition-all duration-100">
+                About
+              </p>
+            </NavLink>
+            <NavLink onClick={() => setShowMenu(false)} to="contact">
+              <p className="px-4 py-2 rounded inline-block hover:text-primary hover:font-bold hover:text-2xl transition-all duration-100">
+                Contact
+              </p>
+            </NavLink>
+          </ul>
+        </div>
       </div>
     </div>
   );
