@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "MyFont";
+  /* src: url("/src/assets/fonts/ArchivoBlack-Regular.ttf"); */
+  src: url("/src/assets/fonts/WinkyRough-VariableFont_wght.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@layer utilities {
+  * {
+    font-family: "MyFont";
+  }
+}
