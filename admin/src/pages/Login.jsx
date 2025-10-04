@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { assets } from "../assets/assets";
 import { AdminContext } from "../context/AdminContext";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [state, setState] = useState("Admin");
@@ -12,19 +13,25 @@ const Login = () => {
   const { setAToken, backendURL } = useContext(AdminContext);
 
   const onSubmitHandler = async (event) => {
-    event.perventDefault();
+    event.preventDefault();
+
     try {
       if (state === "Admin") {
         const { data } = await axios.post(backendURL + "/api/admin/login", {
           email,
           password,
         });
+
         if (data.success) {
-          console.log(data.token);
+          localStorage.setItem("aToken", data.token);
+          setAToken(data.token);
+        } else {
+          toast.error(data.message);
         }
-      } else {
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -36,13 +43,13 @@ const Login = () => {
         <div className="w-full">
           <label htmlFor="email">Email</label>
           <input
-            className="border border-secondary rounded w-full p-2 mt-1"
-            onClick={() => setEmail(email.targer.value)}
+            className="border border-secondary rounded w-full p-2 mt-1 text-black"
+            onChange={(e) => setEmail(e.target.value)}
             value={email}
             type="email"
             name=""
             id="eamil"
-            required
+            // required
           />
         </div>
 
@@ -50,7 +57,7 @@ const Login = () => {
           <label htmlFor="password">Password</label>
           <input
             className="border border-secondary rounded w-full p-2 mt-1"
-            onClick={() => setPassword(password.targer.value)}
+            onChange={(e) => setPassword(e.target.value)}
             value={password}
             type="password"
             name=""
