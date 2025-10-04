@@ -35,3 +35,20 @@ export const assets = {
     homeicon
 
 }
+
+
+
+
+export const specialityData = [
+    "General Practice",
+    "Pediatrics",
+    "Cardiology",
+    "Dermatology",
+    "Gynecology",
+    "Orthopedics",
+    "Ophthalmology",
+    "Dentistry",
+    "Gastroenterology",
+    "Psychiatry",
+]
+
