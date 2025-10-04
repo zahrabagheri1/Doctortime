@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Login from "./pages/Login";
 
 const App = () => {
   return (
-    <div className='text-green-950 text-7xl font-bold'>Admin panel</div>
-  )
-}
+    <div>
+      <Login />
+    </div>
+  );
+};
 
-export default App
+export default App;
