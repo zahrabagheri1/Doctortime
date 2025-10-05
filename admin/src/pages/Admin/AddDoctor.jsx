@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { assets, specialityData } from "../../assets/assets";
+import { AdminContext } from "../../context/AdminContext";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const AddDoctor = () => {
   const [docImg, setDocImg] = useState(false);
@@ -14,8 +17,64 @@ const AddDoctor = () => {
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
 
+  const { backendURL, aToken } = useContext(AdminContext);
+
+  const onSubmitHandler = async (event) => {
+    event.preventDefault();
+
+    try {
+      if (!docImg) {
+        return toast.error("Please select an image before submitting!");
+      }
+
+      const formData = new FormData();
+      formData.append("image", docImg);
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("experience", experience);
+      formData.append("fees", Number(fees));
+      formData.append("about", about);
+      formData.append("speciality", speciality);
+      formData.append("degree", degree);
+      formData.append(
+        "address",
+        JSON.stringify({ line1: address1, line2: address2 })
+      );
+
+      // console log formData
+      formData.forEach((value, key) => {
+        console.log(`${key}: ${value}`);
+      });
+
+      const { data } = await axios.post(
+        backendURL + "/api/admin/add-doctor",
+        formData,
+        { headers: { aToken } }
+      );
+
+      if (data.success) {
+        toast.success(data.message);
+        setDocImg(false);
+        setName("");
+        setPassword("");
+        setEmail("");
+        setAddress1("");
+        setAddress2("");
+        setDegree("");
+        setAbout("");
+        setFees("");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+      console.log(error);
+    }
+  };
+
   return (
-    <form className="m-5 w-full">
+    <form onSubmit={onSubmitHandler} className="m-5 w-full">
       <div className="mb-3">
         <p className="text-lg font-bold">Add New Doctor</p>
         <p className="text-sm font-medium">
@@ -24,19 +83,25 @@ const AddDoctor = () => {
         </p>
       </div>
 
-      <div className="bg-white px-8 py-8 border w-full max-w-4xl max-h-[80vh] overflow-scroll">
+      <div className="bg-white px-8 py-8 border rounded-xl w-full max-w-4xl max-h-[75vh] overflow-scroll">
         <div
           className="flex items-center  gap-4 mb-8
         text-gray-500 rounded-full cursor-pointer"
         >
           <label htmlFor="doc-img">
             <img
-              src={assets.uploadareaicon}
-              className="bg-gray-200 rounded-full w-18"
+              src={docImg ? URL.createObjectURL(docImg) : assets.uploadareaicon}
+              className="bg-gray-200 rounded-full w-20 h-20"
               alt=""
             />
           </label>
-          <input type="file" name="" id="doc-img" hidden />
+          <input
+            onChange={(e) => setDocImg(e.target.files[0])}
+            type="file"
+            name=""
+            id="doc-img"
+            hidden
+          />
           <p>
             Upload doctor <br /> picture
           </p>
@@ -49,6 +114,8 @@ const AddDoctor = () => {
               <label htmlFor="doc-name">Doctor Name</label>
               <input
                 className="border border-primary rounded px-3 py-2"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
                 type="text"
                 name=""
                 id="doc-name"
@@ -62,6 +129,8 @@ const AddDoctor = () => {
               <label htmlFor="doc-email">Doctor Email</label>
               <input
                 className="border border-primary rounded px-3 py-2"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
                 type="email"
                 name=""
                 id="doc-email"
@@ -72,9 +141,11 @@ const AddDoctor = () => {
 
             {/* Doctor Password */}
             <div className="flex-1 flex flex-col gap-1">
-              <label htmlFor="doc-password"></label>
+              <label htmlFor="doc-password">Doctor Password</label>
               <input
                 className="border border-primary rounded px-3 py-2"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
                 type="password"
                 name=""
                 id="doc-password"
@@ -87,7 +158,8 @@ const AddDoctor = () => {
             <div className="flex-1 flex flex-col gap-1">
               <label htmlFor="doc-experience">Experience</label>
               <select
-                name=""
+                onChange={(e) => setExperience(e.target.value)}
+                value={experience}
                 className="border border-primary rounded px-3 py-2"
                 id="doc-experience"
                 required
@@ -110,6 +182,8 @@ const AddDoctor = () => {
               <label htmlFor="doc-fees">Fees</label>
               <input
                 className="border border-primary rounded px-3 py-2"
+                onChange={(e) => setFees(e.target.value)}
+                value={fees}
                 type="number"
                 name=""
                 id="doc-fees"
@@ -125,6 +199,8 @@ const AddDoctor = () => {
               <label htmlFor="doc-speciality">Speciality</label>
               <select
                 className="border border-primary rounded px-3 py-2"
+                onChange={(e) => setSpeciality(e.target.value)}
+                value={speciality}
                 id="doc-speciality"
                 required
               >
@@ -149,6 +225,8 @@ const AddDoctor = () => {
               <label htmlFor="doc-eduction">Eduction</label>
               <input
                 className="border border-primary rounded px-3 py-2"
+                onChange={(e) => setDegree(e.target.value)}
+                value={degree}
                 type="text"
                 name=""
                 id="doc-eduction"
@@ -161,6 +239,8 @@ const AddDoctor = () => {
               <label htmlFor="doc-address">Address</label>
               <input
                 className="border border-primary rounded px-3 py-2"
+                onChange={(e) => setAddress1(e.target.value)}
+                value={address1}
                 type="text"
                 name=""
                 id="doc-address"
@@ -169,9 +249,11 @@ const AddDoctor = () => {
               />
               <input
                 className="border border-primary rounded px-3 py-2"
+                onChange={(e) => setAddress2(e.target.value)}
+                value={address2}
                 type="text"
                 name=""
-                id="doc-address"
+                id="doc-address2"
                 placeholder="Address 2"
                 required
               />
@@ -185,6 +267,8 @@ const AddDoctor = () => {
           </label>
           <textarea
             className=" w-full border border-primary  rounded px-4 pt-2 resize-none"
+            onChange={(e) => setAbout(e.target.value)}
+            value={about}
             type="text"
             rows={5}
             id="doc-about"
@@ -194,7 +278,10 @@ const AddDoctor = () => {
         </div>
 
         {/* BTN */}
-        <button className="bg-primary text-white text-sm px-10 py-3 mt-4 rounded-full">
+        <button
+          type="submit"
+          className="bg-primary text-white text-sm px-10 py-3 mt-4 rounded-full"
+        >
           Add Doctor
         </button>
       </div>
