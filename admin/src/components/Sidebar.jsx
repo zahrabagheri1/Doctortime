@@ -7,13 +7,13 @@ const Sidebar = () => {
   const { aToken } = useContext(AdminContext);
 
   return (
-    <div className="min-h-screen bg-white border-r border-gray-400">
+    <div className="min-h-screen bg-white border-r  border-gray-400">
       {aToken && (
         <ul className="text-gray-700 mt-5">
           <NavLink
             to={"/admin-dashboard"}
             className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${
+              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-50 cursor-pointer ${
                 isActive ? "bg-[#d5e6fc] border-r-4 border-primary " : ""
               }`
             }
@@ -22,7 +22,7 @@ const Sidebar = () => {
             <p>Dashboard</p>
           </NavLink>
           <NavLink to={"/all-appointments"}  className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${
+              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-50 cursor-pointer ${
                 isActive ? "bg-[#d5e6fc] border-r-4 border-primary " : ""
               }`
             }>
@@ -30,7 +30,7 @@ const Sidebar = () => {
             <p>Appointments</p>
           </NavLink>
           <NavLink to={"/add-doctor"}  className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${
+              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-50 cursor-pointer ${
                 isActive ? "bg-[#d5e6fc] border-r-4 border-primary " : ""
               }`
             }>
@@ -38,7 +38,7 @@ const Sidebar = () => {
             <p>Add Doctor</p>
           </NavLink>
           <NavLink to={"/doctor-list"}  className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${
+              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-50 cursor-pointer ${
                 isActive ? "bg-[#d5e6fc] border-r-4 border-primary " : ""
               }`
             }>
