@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const Longin = () => {
-  const { bachendURL, token, setToken } = useState(AppContext);
+  const { backendURL, token, setToken } = useContext(AppContext);
   const navigate = useNavigate();
 
   const [state, setState] = useState("singup");
@@ -14,12 +14,13 @@ const Longin = () => {
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
 
+  // console.log(backendURL)
   const onSubmitHandler = async (event) => {
     event.preventDefault();
 
     try {
-      if (state === "Sign up") {
-        const { data } = await axios.post(bachendURL + "/api/user/register", {
+      if (state === "singup") {
+        const { data } = await axios.post(backendURL + "/api/user/register", {
           name,
           password,
           email,
@@ -32,7 +33,7 @@ const Longin = () => {
           toast.error(data.message);
         }
       } else {
-        const { data } = await axios.post(bachendURL + "/api/user/login", {
+        const { data } = await axios.post(backendURL + "/api/user/login", {
           password,
           email,
         });
@@ -107,7 +108,7 @@ const Longin = () => {
           type="submit"
           className="bg-primary text-gray-50 w-full py-2 rounded-md text-base"
         >
-          {state === "singup" ? "Create Account" : "Login"}
+          {state === "singup" ? "Create Account" : "login"}
         </button>
 
         {state === "singup" ? (
