@@ -15,7 +15,7 @@ const Appointment = () => {
   const [slotTime, setSlotTime] = useState("");
 
   const fetchDocInfo = async () => {
-    const docInfo = doctors.find((doc) => doc.id === docId);
+    const docInfo = doctors.find((doc) => doc._id === docId);
     setDocInfo(docInfo);
   };
 
@@ -81,16 +81,16 @@ const Appointment = () => {
     docInfo && (
       <div className="mt-5">
         {/* Doctor Details */}
-        <div className="flex flex-col sm:flex-row gap-4 lg:max-h-60">
-          <div>
-            <img
-              className="bg-primary relative w-full h-full sm:max-w-72 rounded-lg"
-              src={docInfo.image}
-              alt={docInfo.name}
-            />
-          </div>
+        <div className="flex flex-col sm:flex-row gap-4 lg:max-h-full ">
+          {/* Doctor Image */}
+          <img
+            className="bg-primary relative w-full h-full sm:w-50  rounded-xl"
+            src={docInfo.image}
+            alt={docInfo.name}
+          />
+
           {/* DocInfo: name, degree, experience */}
-          <div className="flex-1 border border-gray-400 rounded-lg p-8 py-7 bg-white mx-2 sm:mx-0 mt-[-80px] sm:mt-0">
+          <div className="flex-1 border border-gray-400 rounded-lg p-8 py-7 bg-white mx-2 sm:mx-0 sm:mt-0">
             <p className="flex items-center gap-2 text-2xl font-medium text-gray-900">
               {docInfo.name}
               <img
