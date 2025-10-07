@@ -46,7 +46,7 @@ const Appointment = () => {
       }
 
       let timeSlots = [];
-      while ( currentDate < endTime) {
+      while (currentDate < endTime) {
         let formatTime = currentDate.toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",

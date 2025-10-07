@@ -1,37 +1,103 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
+import { assets } from "../assets/assets";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Myprofile = () => {
-  const { userData, setUserData } = useContext(AppContext);
-  const [isEdit, setIsEdit] = useState(false);
+  const { userData, setUserData, token, backendURL, loadUserProfileData } =
+    useContext(AppContext);
 
-  console.log(userData)
+  const [isEdit, setIsEdit] = useState(false);
+  const [image, setImage] = useState(false);
+
+  const updateUserProfleData = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("name", userData.name);
+      formData.append("phone", userData.phone);
+      formData.append("address", JSON.stringify(userData.address));
+      formData.append("gender", userData.gender);
+      formData.append("dob", userData.dob);
+
+      image && formData.append("image", image);
+
+      const { data } = await axios.post(
+        backendURL + "/api/user/update-profile",
+        formData,
+        { headers: { token } }
+      );
+      if (data.success) {
+        toast.success(data.message);
+        await loadUserProfileData();
+
+        setIsEdit(false);
+        setImage(false);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
+  console.log(userData);
   return (
     userData && (
       <div className="max-w-lg flex flex-col gap2 text-sm">
-        <img
-          className="w-36 rounded"
-          src={userData.image}
-          alt={userData.name}
-        />
+        <div className="flex gap-4 items-center py-4">
+          {isEdit ? (
+            <label htmlFor="image">
+              <div className="inline-block relative cursor-pointer">
+                <img
+                  className="w-45 rounded-full opacity-75"
+                  src={image ? URL.createObjectURL(image) : userData.image}
+                  alt=""
+                />
+                <img
+                  className="w-15 absolute bottom-10 right-15 opacity-20"
+                  src={image ? "" : assets.uploadIcon}
+                  alt=""
+                />
+              </div>
+              <input
+                onChange={(e) => setImage(e.target.files[0])}
+                type="file"
+                id="image"
+                hidden
+              />
+            </label>
+          ) : (
+            <img
+              className="w-45 rounded-full"
+              src={userData.image}
+              alt={userData.name}
+            />
+          )}
 
-        {isEdit ? (
-          <input
-            type="text"
-            name=""
-            id=""
-            className="bg-gray-100 text-2xl font-medium max-w-60 mt-1 mb-2 border border-primary rounded w-full p-1"
-            value={userData.name}
-            onChange={(e) =>
-              setUserData((prev) => ({ ...prev, name: e.target.value }))
-            }
-          />
-        ) : (
-          <p className="font-medium text-2xl text-neutral-800 mt-1 mb-2 p-1">
-            {userData.name}
-          </p>
-        )}
-
+          {isEdit ? (
+            <input
+              type="text"
+              name=""
+              id=""
+              className="bg-gray-100 text-2xl font-medium max-w-60 mt-1 mb-2 border border-primary rounded w-full p-1"
+              value={userData.name}
+              onChange={(e) =>
+                setUserData((prev) => ({ ...prev, name: e.target.value }))
+              }
+            />
+          ) : (
+            <div>
+              <p className="font-medium text-2xl text-neutral-800">
+                {userData.name}
+              </p>
+              <p className=" font-medium text-sm text-neutral-300 ml-2">
+                {userData.email}
+              </p>
+            </div>
+          )}
+        </div>
         <hr className="bg-zinc-400 h-[1px] border-none" />
 
         <div>
@@ -138,7 +204,7 @@ const Myprofile = () => {
         <div className="mt-10">
           {isEdit ? (
             <button
-              onClick={() => setIsEdit(false)}
+              onClick={updateUserProfleData}
               className="bg-primary text-white px-8 py-2 rounded-md text-base hover:bg-third hover:text-white transition-all"
             >
               Save information

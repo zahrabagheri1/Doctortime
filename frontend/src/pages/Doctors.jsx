@@ -19,8 +19,10 @@ const Doctors = () => {
     applyFilter();
   }, [doctors, speciality]);
 
+  console.log(filterDoc)
   return (
     <div>
+      {/* <p className="text-black">All Doctors</p> */}
       <p className="text-gray-600">Browse through the doctors specialist.</p>
       <div className="flex flex-col sm:flex-row items-start gap-5 mt-5">
         <button
@@ -33,7 +35,7 @@ const Doctors = () => {
         </button>
         <div
           className={`flex-col gap-2 text-sm text-gray-600 ${
-            showFilter ? "flex" : "hidden sm:flex" 
+            showFilter ? "flex" : "hidden sm:flex"
           }`}
         >
           {specialityData.map((sep, index) => (
@@ -57,13 +59,13 @@ const Doctors = () => {
           {filterDoc.map((item, index) => (
             <div
               key={index}
-              onClick={() => navigate(`/appointment/${item.id}`)}
-              className=" flex flex-col border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500 "
+              onClick={() => navigate(`/appointment/${item._id}`)}
+              className="h-80 pb-4 flex flex-col border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500 "
             >
               <img
                 src={item.image}
                 alt={item.name}
-                className="bg-white w-full h-4/5"
+                className="bg-white w-full h-3/4"
               />
 
               <div className="p-4">
