@@ -10,7 +10,7 @@ const RelatedDoctors = ({ docId, speciality }) => {
   useEffect(() => {
     if (doctors.length > 0 && speciality) {
       const doctorsData = doctors.filter(
-        (doc) => doc.speciality === speciality && doc.id !== docId
+        (doc) => doc.speciality === speciality && doc._id !== docId
       );
 
       setRelDocs(doctorsData);
@@ -27,7 +27,7 @@ const RelatedDoctors = ({ docId, speciality }) => {
         {relDoc.slice(0, 5).map((item, index) => (
           <div
             key={index}
-            onClick={() => {navigate(`/appointment/${item.id}`); scrollTo(0,0)}}
+            onClick={() => {navigate(`/appointment/${item._id}`); scrollTo(0,0)}}
             className="flex flex-col h-auto border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500 "
           >
             <img

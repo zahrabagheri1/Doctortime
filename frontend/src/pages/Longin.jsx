@@ -1,18 +1,64 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { AppContext } from "../context/AppContext";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Longin = () => {
+  const { backendURL, token, setToken } = useContext(AppContext);
+  const navigate = useNavigate();
+
   const [state, setState] = useState("singup");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
 
+  // console.log(backendURL)
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+
+    try {
+      if (state === "singup") {
+        const { data } = await axios.post(backendURL + "/api/user/register", {
+          name,
+          password,
+          email,
+        });
+
+        if (data.success) {
+          localStorage.setItem("token", data.token);
+          setToken(data.token);
+        } else {
+          toast.error(data.message);
+        }
+      } else {
+        const { data } = await axios.post(backendURL + "/api/user/login", {
+          password,
+          email,
+        });
+
+        if (data.success) {
+          localStorage.setItem("token", data.token);
+          setToken(data.token);
+        } else {
+          toast.error(data.message);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
   };
 
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token]);
+
   return (
-    <form className="min-h-[80vh] flex items-center">
+    <form onSubmit={onSubmitHandler} className="min-h-[80vh] flex items-center">
       <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-zinc-600 text-sm shadow-lg">
         <p className="text-2xl font-semibold">
           {state === "singup" ? "Create Account" : "Login"}
@@ -28,7 +74,7 @@ const Longin = () => {
               type="text"
               id="fullname"
               className=" border border-primary rounded w-full p-2 mt-1"
-              onChange={(e) => setFullName(e.target.fullName)}
+              onChange={(e) => setFullName(e.target.value)}
               value={fullName}
               required
             />
@@ -41,7 +87,7 @@ const Longin = () => {
             type="email"
             id="email"
             className=" border border-primary rounded w-full p-2 mt-1"
-            onChange={(e) => setEmail(e.target.email)}
+            onChange={(e) => setEmail(e.target.value)}
             value={email}
             required
           />
@@ -53,13 +99,16 @@ const Longin = () => {
             type="password"
             id="password"
             className=" border border-primary rounded w-full p-2 mt-1"
-            onChange={(e) => setPassword(e.target.password)}
+            onChange={(e) => setPassword(e.target.value)}
             value={password}
             required
           />
         </div>
-        <button className="bg-primary text-gray-50 w-full py-2 rounded-md text-base">
-          {state === "singup" ? "Create Account" : "Login"}
+        <button
+          type="submit"
+          className="bg-primary text-gray-50 w-full py-2 rounded-md text-base"
+        >
+          {state === "singup" ? "Create Account" : "login"}
         </button>
 
         {state === "singup" ? (
