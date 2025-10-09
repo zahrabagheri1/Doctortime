@@ -7,12 +7,13 @@ import canceleicon from './imgs/icons/cancele-icon.png'
 import doctoricon from './imgs/icons/doctor-icon.png'
 import doctoraddicon from './imgs/icons/doctoradd-icon.png'
 import earningicon from './imgs/icons/earning-icon.png'
-import listicon from './imgs/icons/list-icon.png'
+import listicon from './imgs/icons/list.png'
 import patienticon from './imgs/icons/patient-icon.png'
 import tikicon from './imgs/icons/tick-icon.png'
 import uploadicon from './imgs/icons/upload-icon.png'
 import uploadareaicon from './imgs/icons/uploadarea-icon.png'
 import usericon from './imgs/icons/user-icon.png'
+import homeicon from './imgs/icons/home.png'
 
 
 export const assets = {
@@ -30,6 +31,24 @@ export const assets = {
     tikicon,
     uploadareaicon,
     uploadicon,
-    usericon
+    usericon,
+    homeicon
 
 }
+
+
+
+
+export const specialityData = [
+    "General Practice",
+    "Pediatrics",
+    "Cardiology",
+    "Dermatology",
+    "Gynecology",
+    "Orthopedics",
+    "Ophthalmology",
+    "Dentistry",
+    "Gastroenterology",
+    "Psychiatry",
+]
+
