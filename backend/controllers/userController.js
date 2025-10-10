@@ -46,7 +46,6 @@ const registerUser = async (req, res) => {
     }
 }
 
-
 // API for user login
 const loginUser = async (req, res) => {
     try {
@@ -71,9 +70,7 @@ const loginUser = async (req, res) => {
     }
 }
 
-
 // API to get user profile data
-
 const getProfile = async (req, res) => {
     try {
         const { userId } = req.user
@@ -86,7 +83,6 @@ const getProfile = async (req, res) => {
         res.json({ success: false, message: error.message })
     }
 }
-
 
 // API to update user profile
 const updateProfile = async (req, res) => {
@@ -117,8 +113,6 @@ const updateProfile = async (req, res) => {
     }
 }
 
-
-
 // API to book appointment
 const bookAppointment = async (req, res) => {
     try {
@@ -126,7 +120,7 @@ const bookAppointment = async (req, res) => {
         const docData = await doctorModel.findById(docId).select('-password')
 
         if (!docData.available) {
-            return res.json({ success: true, message: 'Doctor not available' })
+            return res.json({ success: false, message: 'Doctor not available' })
         }
 
         let slotsBooked = docData.slotsBooked
@@ -162,10 +156,8 @@ const bookAppointment = async (req, res) => {
         await newAppointment.save()
 
         // save new slots data in doctorData
-        await doctorModel.findByIdAndDelete(docId, { slotsBooked })
+        await doctorModel.findByIdAndUpdate(docId, { slotsBooked })
         res.json({success:true, message:'Appointment Booked'})
-        
-
     }
 
     catch (error) {
