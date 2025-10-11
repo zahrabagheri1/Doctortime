@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const appointmentSchema = new mongoose.Schema({
     userId: { type: String, require: true },
     docId: { type: String, require: true },
-    sloctDate: { type: String, require: true },
+    slotDate: { type: String, require: true },
     slotTime: { type: String, require: true },
     userData: { type: Object, require: true },
     docData: { type: Object, require: true },
