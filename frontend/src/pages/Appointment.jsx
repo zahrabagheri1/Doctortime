@@ -52,16 +52,33 @@ const Appointment = () => {
 
       let timeSlots = [];
       while (currentDate < endTime) {
-        let formatTime = currentDate.toLocaleTimeString([], {
+        let formattedTime = currentDate.toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
         });
 
-        // add slot to array
-        timeSlots.push({
-          datetime: new Date(currentDate),
-          time: formatTime,
-        });
+        let day = currentDate.getDate();
+        let month = currentDate.getMonth() + 1;
+        let year = currentDate.getFullYear();
+
+        const slotDate = day + "_" + month + "_" + year;
+        const slotTime = formattedTime;
+
+        const isSlotAvailable =
+          docInfo.slotsBooked[slotDate] &&
+          docInfo.slotsBooked[slotDate].includes(slotTime)
+            ? false
+            : true;
+
+        if(isSlotAvailable){
+          // add slot to array
+          timeSlots.push({
+            datetime: new Date(currentDate),
+            time: formattedTime,
+          });
+
+        }
+        
         // Increment current timme by 30 minutes
         currentDate.setMinutes(currentDate.getMinutes() + 30);
       }
@@ -84,7 +101,6 @@ const Appointment = () => {
       let year = date.getFullYear();
 
       const slotDate = day + "_" + month + "_" + year;
-      // console.log(slotDate);
 
       const { data } = await axios.post(
         backendURL + "/api/user/book-appointment",
