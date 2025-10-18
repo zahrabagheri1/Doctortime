@@ -117,7 +117,8 @@ export const updateProfile = async (req, res) => {
 // API to book appointment
 export const bookAppointment = async (req, res) => {
     try {
-        const { userId, docId, slotDate, slotTime } = req.body
+        const {  docId, slotDate, slotTime } = req.body
+        const {userId} =req.user
         const docData = await doctorModel.findById(docId).select('-password')
 
         if (!docData.available) {
@@ -140,6 +141,13 @@ export const bookAppointment = async (req, res) => {
         }
 
         const userData = await userModel.findById(userId).select('-password')
+
+        // console.log(userData, userId)
+
+        if (!userData) {
+            return res.json({ success: false, message: "User not found, cannot book appointment." });
+        }
+        
         delete docData.slotsBooked
 
         const appointmentData = {
@@ -160,9 +168,7 @@ export const bookAppointment = async (req, res) => {
         await doctorModel.findByIdAndUpdate(docId, { slotsBooked })
         res.json({ success: true, message: 'Appointment Booked' })
 
-    }
-
-    catch (error) {
+    }catch (error) {
         console.log(error)
         res.json({ success: false, message: error.message })
     }
@@ -255,7 +261,6 @@ export const paymentStripe = async (req, res) => {
 
     }
 }
-
 
 // Checking the payment status and update db
 export const getStripeSessionStatus = async (req, res) => {

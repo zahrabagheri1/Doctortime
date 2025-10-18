@@ -12,7 +12,6 @@ const changeAvailablity = async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        const { docId } = req.body
         res.json({ success: false, message: error.message })
     }
 }
