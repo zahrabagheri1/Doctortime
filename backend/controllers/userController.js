@@ -8,7 +8,7 @@ import appointmentModel from '../models/appointmentModel.js'
 import Stripe from 'stripe'
 
 // API to register user
-const registerUser = async (req, res) => {
+export const registerUser = async (req, res) => {
     try {
         const { name, email, password } = req.body
 
@@ -48,7 +48,7 @@ const registerUser = async (req, res) => {
 }
 
 // API for user login
-const loginUser = async (req, res) => {
+export const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body
         const user = await userModel.findOne({ email })
@@ -72,7 +72,7 @@ const loginUser = async (req, res) => {
 }
 
 // API to get user profile data
-const getProfile = async (req, res) => {
+export const getProfile = async (req, res) => {
     try {
         const { userId } = req.user
         const userData = await userModel.findById(userId).select('-password')
@@ -86,7 +86,7 @@ const getProfile = async (req, res) => {
 }
 
 // API to update user profile
-const updateProfile = async (req, res) => {
+export const updateProfile = async (req, res) => {
     try {
         const { name, phone, address, dob, gender } = req.body
         const userId = req.user.userId;
@@ -115,7 +115,7 @@ const updateProfile = async (req, res) => {
 }
 
 // API to book appointment
-const bookAppointment = async (req, res) => {
+export const bookAppointment = async (req, res) => {
     try {
         const { userId, docId, slotDate, slotTime } = req.body
         const docData = await doctorModel.findById(docId).select('-password')
@@ -169,7 +169,7 @@ const bookAppointment = async (req, res) => {
 }
 
 // API to get usessr appointments for frontend my-appointment page
-const listAppointment = async (req, res) => {
+export const listAppointment = async (req, res) => {
     try {
         const { userId } = req.query
         const appointments = await appointmentModel.find({ userId })
@@ -182,7 +182,7 @@ const listAppointment = async (req, res) => {
 }
 
 // API to cancel appointment
-const cancelappointment = async (req, res) => {
+export const cancelappointment = async (req, res) => {
     try {
         const { userId, appointmentId } = req.body
         const appointmentData = await appointmentModel.findById(appointmentId)
@@ -210,48 +210,75 @@ const cancelappointment = async (req, res) => {
     }
 }
 
-const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY, {
-    apiVersion: "2025-09-30.clover",
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2025-09-30.clover'
 });
 
-
 // API to make payment of appointment using Stripe
-const paymentStripe = async (req, res) => {
+export const paymentStripe = async (req, res) => {
     try {
         const { appointmentId } = req.body
+
         // find appointment
         const appointmentData = await appointmentModel.findById(appointmentId)
-
         if (!appointmentData || appointmentData.cancelled) {
             return res.json({ success: false, message: 'Appointment cancelled or not found' })
         }
 
-        // create   a payment intent
-        const paymentIntent = await stripeInstance.paymentIntents.create({
-            amount: appointmentData.amount * 100, // convert to cents
-            currency: process.env.CURRENCY || 'aud',
-            description: `Payment for appointment ${appointmentId}`,
-            metadata: { appointmentId },
-            automatic_payment_methods: { enabled: true }
-        })
+        console.log(appointmentData)
+        // create a payment intent
+        const session = await stripe.checkout.sessions.create({
+            mode: "payment",
+            ui_mode: "embedded",
+            payment_method_types: ["card"],
+            line_items: [
+                {
+                    price_data: {
+                        currency: "usd",
+                        product_data: {
+                            name: `Appointment ${appointmentData.docData.name}`,
+                        },
+                        unit_amount: appointmentData.amount * 100,
+                    },
+                    quantity: 1,
+                },
+            ],
+            metadata: { appointmentId: appointmentId },
+            redirect_on_completion: "never",
+        });
 
-        // return client secret to frontend
-        res.json({ success: true,  paymentIntent });
+        res.json({ success: true, clientSecret: session.client_secret, sessionId: session.id });
 
     } catch (error) {
-        console.log(error)
-        res.json({ success: false, message: error.message })
+        console.log("Stripe payment error:", error)
+        res.json({ success: false, message: "Stripe payment error: " + error.message })
 
     }
 }
 
-export {
-    registerUser,
-    loginUser,
-    getProfile,
-    updateProfile,
-    bookAppointment,
-    listAppointment,
-    cancelappointment,
-    paymentStripe
+
+// Checking the payment status and update db
+export const getStripeSessionStatus = async (req, res) => {
+    try {
+        const { session_id } = req.query
+        const session = await stripe.checkout.sessions.retrieve(session_id, {
+            expand: ['payment_intent']
+        })
+
+        const paymentStatus = session.payment_intent?.status === "succeeded";
+
+        if (paymentStatus) {
+            await appointmentModel.findByIdAndUpdate(session.metadata.appointmentId, { payment: true });
+        }
+
+        res.json({
+            status: session_id,
+            payment_status: session.payment_status,
+            payment_intent_id: session.payment_intent?.id,
+            payment_intent_status: session.payment_intent?.status,
+        })
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: 'Unable to fetch session status' })
+    }
 }

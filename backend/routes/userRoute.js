@@ -1,5 +1,5 @@
 import express from 'express'
-import { registerUser, loginUser, getProfile, updateProfile, bookAppointment, listAppointment, cancelappointment, paymentStripe } from '../controllers/userController.js'
+import { registerUser, loginUser, getProfile, updateProfile, bookAppointment, listAppointment, cancelappointment, paymentStripe, getStripeSessionStatus } from '../controllers/userController.js'
 import authUser from '../middlewares/authUser.js'
 import upload from '../middlewares/mullter.js'
 
@@ -15,6 +15,7 @@ userRouter.post('/book-appointment', authUser, bookAppointment)
 userRouter.get('/appointments', authUser, listAppointment)
 userRouter.post('/cancel-appointment', authUser, cancelappointment)
 userRouter.post('/payment-stripe', authUser, paymentStripe)
+userRouter.get('/payment-stripe-status', authUser, getStripeSessionStatus)
 
 
 
