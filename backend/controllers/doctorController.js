@@ -1,6 +1,7 @@
 import doctorModel from "../models/doctorModel.js"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import appointmentModel from "../models/appointmentModel.js"
 
 // API for change doctor avaiblity
 export const changeAvailablity = async (req, res) => {
@@ -43,10 +44,22 @@ export const loginDoctor = async (req, res) => {
         if (isMatch) {
             const token = jwt.sign({ id: doctor._id }, process.env.JWT_SECTET)
             res.json({ success: true, token })
-        }else{
+        } else {
 
             res.json({ success: false, message: "Invalid credentials" })
         }
+
+    } catch (error) {
+        res.json({ success: false, message: error.message })
+    }
+}
+
+// API to get doctor appointmnets for doctor panel
+export const appointmentsDoctor = async (req, res) => {
+    try {
+        const { docId } = req.body
+        const appointmnets = await appointmentModel.findOne({ docId })
+        res.json({ success: true, appointmnets })
 
     } catch (error) {
         res.json({ success: false, message: error.message })

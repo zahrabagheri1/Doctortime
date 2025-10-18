@@ -18,7 +18,7 @@ const AllAppointment = () => {
 
   console.log(appointments);
   return (
-    <div className="w-full max-w-7xl m-5">
+    <div className="w-full max-w-6xl m-5">
       <div className="mb-5">
         <p className="text-lg font-bold">All Appointments</p>
         <p className="text-sm font-medium">
