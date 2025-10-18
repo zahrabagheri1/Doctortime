@@ -1,9 +1,6 @@
-
-
 import jwt from 'jsonwebtoken'
 
 // user authentication middleware
-
 const authUser = async (req, res, next) => {
 
     try {
@@ -14,8 +11,14 @@ const authUser = async (req, res, next) => {
         }
 
         const token_decode = jwt.verify(token, process.env.JWT_SECRET)
-
-        req.user ={userId: token_decode.id}
+        // console.log(token)
+        // console.log(token_decode)
+        
+        if (!token) {
+            return res.json({ success: false, message: "Not authorized, token is missing." });
+        }
+        
+        req.user = { userId: token_decode.id }
         next()
 
     } catch (error) {
