@@ -4,10 +4,19 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { loadStripe } from "@stripe/stripe-js";
+import {
+  EmbeddedCheckoutProvider,
+  EmbeddedCheckout,
+} from "@stripe/react-stripe-js";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const Myappointments = () => {
   const { backendURL, token, getDoctorsData } = useContext(AppContext);
   const [appointments, setAppointments] = useState([]);
+  const [clientSecret, setClientSecret] = useState(null);
+  const [sessionId, setSessionId] = useState(null);
 
   // const months = ['Jan', 'Feb', 'Mar','Apr','May','Jun','Jul','Aug', 'Sep','Dec']
   const getUserAppointments = async () => {
@@ -47,24 +56,51 @@ const Myappointments = () => {
     }
   };
 
-  const initPay = (paymentIntent) => {
-    console.log(paymentIntent);
-  };
-
-  const appointmentStripe = async (appointmentId) => {
+  const handlePayOnline = async (appointmentId) => {
     try {
       const { data } = await axios.post(
         backendURL + "/api/user/payment-stripe",
         { appointmentId },
         { headers: { token } }
       );
-
       if (data.success) {
-        initPay(data.paymentIntent);
+        // Get and store both values
+        setClientSecret(data.clientSecret);
+        setSessionId(data.sessionId);
+      } else {
+        toast.error(data.message);
       }
     } catch (error) {
       console.log(error);
       toast.error(error.message);
+    }
+  };
+
+  const handlePaymentComplete = async () => {
+    if (!sessionId) {
+      toast.error("Session ID not found. Cannot verify payment.");
+      return;
+    }
+
+    try {
+      const { data } = await axios.get(
+        `${backendURL}/api/user/payment-stripe-status?session_id=${sessionId}`,
+        { headers: { token } }
+      );
+
+      if (data.payment_intent_status === "succeeded") {
+        toast.success("Payment successful 🎉");
+        getUserAppointments();
+        getDoctorsData();
+      } else {
+        toast.error("Payment failed or is still processing.");
+      }
+    } catch (error) {
+      console.error("Error verifying payment status:", error);
+      toast.error("Could not verify payment status.");
+    } finally {
+      setClientSecret(null);
+      setSessionId(null);
     }
   };
 
@@ -73,6 +109,22 @@ const Myappointments = () => {
       getUserAppointments();
     }
   }, [token]);
+
+  if (clientSecret) {
+    return (
+      <div id="checkout">
+        <EmbeddedCheckoutProvider
+          stripe={stripePromise}
+          options={{
+            clientSecret,
+            onComplete: handlePaymentComplete,
+          }}
+        >
+          <EmbeddedCheckout />
+        </EmbeddedCheckoutProvider>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -119,15 +171,24 @@ const Myappointments = () => {
                 </span>
               </p>
             </div>
-            <div></div>
+
             {!item.cancelled && (
               <div className="flex flex-col gap-2 justify-end">
-                <button
-                  onClick={() => appointmentStripe(item._id)}
-                  className="text-sm text-center text-stone-500 sm:min-w-48 py-2 border rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
-                >
-                  Pay Online
-                </button>
+                {item.payment ? (
+                  <button
+                    className="text-sm text-center text-green-500 sm:min-w-48 py-2 border rounded-lg transition-all duration-300"
+                    disabled
+                  >
+                    Appointment Paid
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => handlePayOnline(item._id)}
+                    className="text-sm text-center text-stone-500 sm:min-w-48 py-2 border rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+                  >
+                    Pay Online
+                  </button>
+                )}
                 <button
                   onClick={() => cancelAppointment(item._id)}
                   className="text-sm text-center text-stone-500 sm:min-w-48 py-2 border rounded-lg  hover:bg-red-600 hover:text-white transition-all duration-300"
