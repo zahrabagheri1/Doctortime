@@ -70,15 +70,14 @@ const Appointment = () => {
             ? false
             : true;
 
-        if(isSlotAvailable){
+        if (isSlotAvailable) {
           // add slot to array
           timeSlots.push({
             datetime: new Date(currentDate),
             time: formattedTime,
           });
-
         }
-        
+
         // Increment current timme by 30 minutes
         currentDate.setMinutes(currentDate.getMinutes() + 30);
       }
@@ -129,9 +128,9 @@ const Appointment = () => {
     getAvailableSlots();
   }, [docInfo]);
 
-  useEffect(() => {
-    console.log(docSlots);
-  }, [docSlots]);
+  // useEffect(() => {
+  //   console.log(docSlots);
+  // }, [docSlots]);
 
   return (
     docInfo && (
