@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { specialityData } from "../assets/assets";
+import { toast } from "react-toastify";
 
 const Doctors = () => {
   const { speciality } = useParams();
@@ -15,11 +16,17 @@ const Doctors = () => {
       : setFilterDoc(doctors);
   };
 
+  const docAvailable = (doc) => {
+    doc.available
+      ?  navigate(`/appointment/${doc._id}`)
+      : toast.error("Doctor is not available")
+  };
+
   useEffect(() => {
     applyFilter();
   }, [doctors, speciality]);
 
-  console.log(filterDoc)
+  console.log(filterDoc);
   return (
     <div>
       {/* <p className="text-black">All Doctors</p> */}
@@ -56,10 +63,10 @@ const Doctors = () => {
         </div>
 
         <div className="w-full grid grid-cols-auto grid-auto-fill-200 gap-4">
-          {filterDoc.map((item, index) => (
+          {filterDoc.filter(doctor => doctor.available).map((item, index) => (
             <div
               key={index}
-              onClick={() => navigate(`/appointment/${item._id}`)}
+              onClick={() => docAvailable(item)}
               className="h-80 pb-4 flex flex-col border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500 "
             >
               <img
@@ -69,9 +76,17 @@ const Doctors = () => {
               />
 
               <div className="p-4">
-                <div className=" flex items-center gap-2 text-sm text-center text-green-500">
-                  <p className="w-2 h-2 bg-green-500 rounded-full"></p>
-                  <p>Available</p>
+                <div
+                  className={`flex items-center gap-2 text-sm text-center  ${
+                    item.available ? "text-green-500" : "text-red-500"
+                  }`}
+                >
+                  <p
+                    className={`w-2 h-2  rounded-full ${
+                      item.available ? "bg-green-500" : "bg-red-500"
+                    }`}
+                  ></p>
+                  {item.available ? <p>Available</p> : <p>Not Available</p>}
                 </div>
                 <p className="text-gray-900 text-lg font-medium">{item.name}</p>
                 <p className="text-gray-600 text-sm">{item.speciality}</p>

@@ -14,10 +14,13 @@ const TopDocters = () => {
         care.
       </p>
       <div className="w-full grid grid-cols-auto grid-auto-fill-200 gap-4 pt-5 gap-y-6 px-3 sm:px-0">
-        {doctors.slice(0, 14).map((item, index) => (
+        {doctors.filter(doctor => doctor.available).slice(0, 7).map((item, index) => (
           <div
             key={index}
-            onClick={() => {navigate(`/appointment/${item._id}`); scrollTo(0,0)}}
+            onClick={() => {
+              navigate(`/appointment/${item._id}`);
+              scrollTo(0, 0);
+            }}
             className="flex flex-col h-auto border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500 "
           >
             <img

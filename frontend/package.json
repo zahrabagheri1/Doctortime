@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^5.2.0",
+    "@stripe/stripe-js": "^8.0.0",
     "@tailwindcss/vite": "^4.1.13",
     "axios": "^1.12.2",
     "react": "^19.1.1",
