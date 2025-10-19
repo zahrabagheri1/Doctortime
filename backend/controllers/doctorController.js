@@ -131,11 +131,41 @@ export const doctorDashboard = async (req, res) => {
             earnings,
             appointments: appointments.length,
             patients: patients.length,
-            latestAppointments: appointments.reverse().slice(0,5)
+            latestAppointments: appointments.reverse().slice(0, 5)
         }
 
         return res.json({ success: true, dashData })
-        
+
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: error.message })
+    }
+}
+
+// API to get doctor proflie for Doctor Panel
+export const doctorProfile = async (req, res) => {
+    try {
+        const { docId } = req.doctor
+        const profileData = await doctorModel.findById(docId).select('-password')
+
+        res.json({ success: true, profileData })
+
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: error.message })
+    }
+}
+
+// API to upadate doctor profile data form doctor panel
+export const upadateDoctorProfile = async (req, res) => {
+    try {
+        const { docId } = req.doctor
+        const { fees, address, available } = req.body
+
+        await doctorModel.findByIdAndUpdate(docId, { fees, address, available })
+
+        res.json({ success: true, message: 'Profile Updated' })
+
     } catch (error) {
         console.log(error)
         res.json({ success: false, message: error.message })

@@ -27,7 +27,7 @@ const Dashboard = () => {
         <div className="flex flex-warap gap-3">
           {/* doctors */}
           <div
-            onClick={() => navigate('/doctor-list')}
+            onClick={() => navigate("/doctor-list")}
             className="flex items-center gap-2 bg-[#d5e6fc] p-4 min-w-52 border-1 rounded-xl border-gray-100 cursor-pointer hover:scale-105 transition-all"
           >
             <img className="w-14" src={assets.doctoricon} alt="" />
@@ -40,7 +40,7 @@ const Dashboard = () => {
           </div>
           {/* appointments */}
           <div
-            onClick={() => navigate('/all-appointments')}
+            onClick={() => navigate("/all-appointments")}
             className="flex items-center gap-2 bg-[#d5e6fc] p-4 min-w-52 border-1 rounded-xl border-gray-100 cursor-pointer hover:scale-105 transition-all"
           >
             <img className="w-14" src={assets.appointmenticon} alt="" />
@@ -53,7 +53,7 @@ const Dashboard = () => {
           </div>
           {/* users */}
           <div
-            onClick={() => navigate('')}
+            onClick={() => navigate("")}
             className="flex items-center gap-2 bg-[#d5e6fc] p-4 min-w-52 border-1 rounded-xl border-gray-100 cursor-pointer hover:scale-105 transition-all"
           >
             <img className="w-14" src={assets.patienticon} alt="" />
@@ -90,6 +90,10 @@ const Dashboard = () => {
 
               {item.cancelled ? (
                 <p className="text-red-400 text-xs font-semibold ">Cancelled</p>
+              ) : item.isCompleted ? (
+                <p className="text-green-500 text-xs font-semibold ">
+                  Completed
+                </p>
               ) : (
                 <img
                   onClick={() => cancelAppointment(item._id)}

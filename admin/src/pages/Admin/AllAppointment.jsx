@@ -44,7 +44,10 @@ const AllAppointment = () => {
           >
             <p className="max-sm:hidden">{index + 1}</p>
             <div className="flex justify-start items-center gap-2">
-              <img src={item.userData?.image} className="w-12 h-12 rounded-full" />
+              <img
+                src={item.userData?.image}
+                className="w-12 h-12 rounded-full"
+              />
               <p>{item.userData?.name}</p>
             </div>
             <p className="max-sm:hidden">{calculateAge(item.userData?.dob)}</p>
@@ -55,7 +58,10 @@ const AllAppointment = () => {
             </p>
 
             <div className="flex justify-start items-center gap-2">
-              <img src={item.docData?.image} className="w-10 h-10 rounded-full" />
+              <img
+                src={item.docData?.image}
+                className="w-10 h-10 rounded-full"
+              />
               <p>{item.docData?.name}</p>
             </div>
 
@@ -65,6 +71,8 @@ const AllAppointment = () => {
             </p>
             {item.cancelled ? (
               <p className="text-red-500 text-xs font-semibold ">Cancelled</p>
+            ) : item.isCompleted ? (
+              <p className="text-green-500 text-xs font-semibold ">Completed</p>
             ) : (
               <img
                 onClick={() => cancelAppointment(item._id)}
