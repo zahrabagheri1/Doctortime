@@ -9,13 +9,13 @@ const Sidebar = () => {
   const { dToken } = useContext(DoctorContext);
 
   return (
-    <div className="min-h-screen bg-white border-r  border-gray-400">
+    <div className="min-h-screen bg-white border-r border-gray-400">
       {aToken && (
         <ul className="text-gray-700 mt-5">
           <NavLink
             to={"/admin-dashboard"}
             className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-50 cursor-pointer ${
+              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-10 cursor-pointer ${
                 isActive ? "bg-[#d5e6fc] border-r-4 border-primary " : ""
               }`
             }
@@ -26,7 +26,7 @@ const Sidebar = () => {
           <NavLink
             to={"/all-appointments"}
             className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-50 cursor-pointer ${
+              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-10 cursor-pointer ${
                 isActive ? "bg-[#d5e6fc] border-r-4 border-primary " : ""
               }`
             }
@@ -37,7 +37,7 @@ const Sidebar = () => {
           <NavLink
             to={"/add-doctor"}
             className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-50 cursor-pointer ${
+              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-10 cursor-pointer ${
                 isActive ? "bg-[#d5e6fc] border-r-4 border-primary " : ""
               }`
             }
@@ -48,7 +48,7 @@ const Sidebar = () => {
           <NavLink
             to={"/doctor-list"}
             className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-50 cursor-pointer ${
+              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-10 cursor-pointer ${
                 isActive ? "bg-[#d5e6fc] border-r-4 border-primary " : ""
               }`
             }
@@ -64,7 +64,7 @@ const Sidebar = () => {
           <NavLink
             to={"/doctor-dashboard"}
             className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-50 cursor-pointer ${
+              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-10 cursor-pointer ${
                 isActive ? "bg-[#d5e6fc] border-r-4 border-primary " : ""
               }`
             }
@@ -73,9 +73,9 @@ const Sidebar = () => {
             <p className="hidden md:block">Dashboard</p>
           </NavLink>
           <NavLink
-            to={"/docotor-appointments"}
+            to={"/doctor-appointments"}
             className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-50 cursor-pointer ${
+              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-10 cursor-pointer ${
                 isActive ? "bg-[#d5e6fc] border-r-4 border-primary " : ""
               }`
             }
@@ -86,7 +86,7 @@ const Sidebar = () => {
           <NavLink
             to={"/doctor-profile"}
             className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-50 cursor-pointer ${
+              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-60 min-w-10 cursor-pointer ${
                 isActive ? "bg-[#d5e6fc] border-r-4 border-primary " : ""
               }`
             }

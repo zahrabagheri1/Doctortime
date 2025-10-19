@@ -4,10 +4,16 @@ import { AppContext } from "../../context/AppContext";
 import { assets } from "../../assets/assets";
 
 const DoctorAppointments = () => {
-  const { dToken, appointmnets, setAppointments, getAppointmnets } =
-    useContext(DoctorContext);
+  const {
+    dToken,
+    appointmnets,
+    getAppointmnets,
+    cancelAppointment,
+    completeAppointment,
+  } = useContext(DoctorContext);
   const { calculateAge, slotDateFormat, currency } = useContext(AppContext);
 
+  console.log(appointmnets)
   useEffect(() => {
     if (dToken) getAppointmnets();
   }, [dToken]);
@@ -25,14 +31,14 @@ const DoctorAppointments = () => {
           <p>Patient</p>
           <p>Payment</p>
           <p>Age</p>
-          <p>DAte & Time</p>
+          <p>Date & Time</p>
           <p>Fees</p>
           <p>Action</p>
         </div>
         {appointmnets?.map((item, index) => (
           <div
             key={index}
-            className="flex flex-wrap justify-between max-sm:page-5 max-sm:text-base sm:grid grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] gap-1 items-center text-gray-500 border-b px-6 py-3  hover::bg-gray-500"
+            className="flex flex-wrap justify-between max-sm:page-5 max-sm:text-base sm:grid grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] gap-1 items-center text-gray-500 border-b px-6 py-3  hover:bg-gray-100"
           >
             <p className="max-sm:hidden">{index + 1}</p>
             <div className="flex justify-start items-center gap-2">
@@ -43,24 +49,42 @@ const DoctorAppointments = () => {
               <p>{item.userData?.name}</p>
             </div>
             <div>
-              <p>{item.payment ? "Online" : "CASH"}</p>
+              <p className="text-xs inline border-2 bg-secondary text-white border-primary px-2 rounded-full">
+                {item?.payment ? "Online" : "CASH"}
+              </p>
             </div>
             <p className="max-sm:hidden">{calculateAge(item.userData?.dob)}</p>
             <p className="flex flex-row gap-2">
-              <span>{slotDateFormat(item.slotDate)}</span>
+              <span>{slotDateFormat(item?.slotDate)}</span>
               <span>|</span>
-              <span>{item.slotTime}</span>
+              <span>{item?.slotTime}</span>
             </p>
 
             <p>
               {currency}
-              {item.amount}
+              {item?.amount}
             </p>
 
-            <div className="">
-              <img src={assets.canceleicon} onClick={} alt="" />
-              <img src={assets.tikicon} onClick={} alt="" />
-            </div>
+            {item.cancelled ? (
+              <p className="text-red-500 text-xs font-semibold ">Cancelled</p>
+            ) : item.isCompleted ? (
+              <p className="text-green-500 text-xs font-semibold ">Completed</p>
+            ) : (
+              <div className="flex flex-row gap-3">
+                <img
+                  className="w-8 h-8 cursor-pointer"
+                  src={assets.canceleicon}
+                  onClick={() => cancelAppointment(item._id)}
+                  alt=""
+                />
+                <img
+                  className="w-8 h-8 cursor-pointer"
+                  src={assets.tikicon}
+                  onClick={() => completeAppointment(item._id)}
+                  alt=""
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>

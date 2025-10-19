@@ -36,11 +36,12 @@ const Login = () => {
           password,
         });
 
+        console.log(data)
         if (data.success) {
           localStorage.setItem("dToken", data.token);
           setDToken(data.token);
         } else {
-          toast.error(data.message);
+          toast.error("login: " + data.message);
         }
       }
     } catch (error) {

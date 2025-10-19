@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken'
 const authDoctor = async (req, res, next) => {
 
     try {
-
         const { dtoken } = req.headers
 
         if (!dtoken) {
@@ -13,10 +12,10 @@ const authDoctor = async (req, res, next) => {
         }
 
         const token_decode = jwt.verify(dtoken, process.env.JWT_SECRET)
-        // console.log(token)
-        // console.log(token_decode)
-
-        req.body.docId = token_decode.id
+        // console.log(token_decode.id)
+        // console.log(req.body.docId)
+        
+        req.doctor = { docId: token_decode.id }
         next()
 
     } catch (error) {

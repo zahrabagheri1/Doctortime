@@ -64,7 +64,7 @@ const AllAppointment = () => {
               {item.amount}
             </p>
             {item.cancelled ? (
-              <p className="text-red-400 text-xs font-semibold ">Cancelled</p>
+              <p className="text-red-500 text-xs font-semibold ">Cancelled</p>
             ) : (
               <img
                 onClick={() => cancelAppointment(item._id)}
