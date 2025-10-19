@@ -22,7 +22,7 @@ const DoctorAppointments = () => {
     <div className="w-full max-w-6xl m-5">
       <div className="mb-5">
         <p className="text-lg font-bold">Doctor Appointments</p>
-        <p className="text-sm font-medium"></p>
+        <p className="text-sm font-medium">Manage your upcoming visits and schedule new consultations with ease.</p>
       </div>
 
       <div className="bg-white border border-gray-300 rounded  text-sm max-h-[75vh] min-h-[60vh] overflow-y-scroll">
