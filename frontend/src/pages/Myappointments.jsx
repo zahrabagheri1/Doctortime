@@ -172,7 +172,7 @@ const Myappointments = () => {
               </p>
             </div>
 
-            {!item.cancelled && (
+            {!item.cancelled && item.isCompleted && (
               <div className="flex flex-col gap-2 justify-end">
                 {item.payment ? (
                   <button
@@ -205,6 +205,11 @@ const Myappointments = () => {
                 </button>
               )}
             </div>
+            
+            {item.isCompleted && 
+                  <button className="text-sm text-center text-green-600 sm:min-w-48 py-2 border border-red-text-red-600 rounded-lg">
+                  Appointment Completed
+                </button>}
           </div>
         ))}
       </div>

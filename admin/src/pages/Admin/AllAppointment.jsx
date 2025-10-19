@@ -18,7 +18,7 @@ const AllAppointment = () => {
 
   console.log(appointments);
   return (
-    <div className="w-full max-w-7xl m-5">
+    <div className="w-full max-w-6xl m-5">
       <div className="mb-5">
         <p className="text-lg font-bold">All Appointments</p>
         <p className="text-sm font-medium">
@@ -44,7 +44,10 @@ const AllAppointment = () => {
           >
             <p className="max-sm:hidden">{index + 1}</p>
             <div className="flex justify-start items-center gap-2">
-              <img src={item.userData?.image} className="w-12 h-12 rounded-full" />
+              <img
+                src={item.userData?.image}
+                className="w-12 h-12 rounded-full"
+              />
               <p>{item.userData?.name}</p>
             </div>
             <p className="max-sm:hidden">{calculateAge(item.userData?.dob)}</p>
@@ -55,7 +58,10 @@ const AllAppointment = () => {
             </p>
 
             <div className="flex justify-start items-center gap-2">
-              <img src={item.docData?.image} className="w-10 h-10 rounded-full" />
+              <img
+                src={item.docData?.image}
+                className="w-10 h-10 rounded-full"
+              />
               <p>{item.docData?.name}</p>
             </div>
 
@@ -64,7 +70,9 @@ const AllAppointment = () => {
               {item.amount}
             </p>
             {item.cancelled ? (
-              <p className="text-red-400 text-xs font-semibold ">Cancelled</p>
+              <p className="text-red-500 text-xs font-semibold ">Cancelled</p>
+            ) : item.isCompleted ? (
+              <p className="text-green-500 text-xs font-semibold ">Completed</p>
             ) : (
               <img
                 onClick={() => cancelAppointment(item._id)}

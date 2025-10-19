@@ -13,7 +13,6 @@ const port = process.env.PORT || 4000
 connectDB()
 connectCloudinary()
 
-
 // middlewares
 app.use(express.json())
 app.use(cors())
@@ -25,7 +24,6 @@ app.use('/api/user', userRouter)
 
 app.get('/', (req, res) => {
     res.send("API WORKING")
-
 })
 
 app.listen(port, () => console.log("Server Started", port))
