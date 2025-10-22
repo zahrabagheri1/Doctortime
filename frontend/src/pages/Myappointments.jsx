@@ -25,6 +25,7 @@ const Myappointments = () => {
         headers: { token },
       });
 
+      console.log(data);
       if (data.success) {
         setAppointments(data.appointments.reverse());
         console.log(data.appointments);
@@ -172,38 +173,12 @@ const Myappointments = () => {
               </p>
             </div>
 
-            {!item.cancelled && (
-              <div className="flex flex-col gap-2 justify-end">
-                {item.payment ? (
-                  <button
-                    className="text-sm text-center text-green-500 sm:min-w-48 py-2 border rounded-lg transition-all duration-300"
-                    disabled
-                  >
-                    Appointment Paid
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => handlePayOnline(item._id)}
-                    className="text-sm text-center text-stone-500 sm:min-w-48 py-2 border rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
-                  >
-                    Pay Online
-                  </button>
-                )}
-                <button
-                  onClick={() => cancelAppointment(item._id)}
-                  className="text-sm text-center text-stone-500 sm:min-w-48 py-2 border rounded-lg  hover:bg-red-600 hover:text-white transition-all duration-300"
-                >
-                  Cancel appointment
-                </button>
-              </div>
-            )}
-
             <div className="flex flex-col gap-2 justify-end">
-              {item.cancelled && (
-                <button className="text-sm text-center text-red-600 sm:min-w-48 py-2 border border-red-text-red-600 rounded-lg">
-                  Appointment Cancelled
-                </button>
-              )}
+              {item.payment && !item.isCompleted && !item.cancelled && <button className="text-sm text-center text-green-500 sm:min-w-48 py-2 border rounded-lg transition-all duration-300" disabled>Appointment Paid</button>}
+              {!item.isCompleted && !item.cancelled && !item.payment && <button onClick={() => handlePayOnline(item._id)} className="text-sm text-center text-stone-500 sm:min-w-48 py-2 border rounded-lg hover:bg-primary hover:text-white transition-all duration-300">Pay Online</button>}
+              {!item.isCompleted && !item.cancelled  && <button onClick={() => cancelAppointment(item._id)} className="text-sm text-center text-stone-500 sm:min-w-48 py-2 border rounded-lg  hover:bg-red-600 hover:text-white transition-all duration-300">Cancel appointment</button>}
+              {item.cancelled && !item.isCompleted  && <button className="text-sm text-center text-red-600 sm:min-w-48 py-2 border border-red-text-red-600 rounded-lg">Appointment Cancelled</button>}
+              {item.isCompleted && <button className="text-sm text-center text-green-600 sm:min-w-48 py-2 border border-red-text-red-600 rounded-lg">Appointment Completed</button>}
             </div>
           </div>
         ))}

@@ -18,7 +18,7 @@ const DoctorsList = () => {
           fees, and availability.
         </p>
       </div>
-      <div className="w-full flex flex-wrap gap-4 pt-5 gap-y-6">
+      <div className="w-full flex flex-wrap gap-4  gap-y-6">
         {doctors.map((item, index) => (
           <div
             key={index}
