@@ -1,5 +1,5 @@
 # 💉Doctortime🩺
-#### 📹Video Demo: <https://www.youtube.com/watch?v=CIuIxqUQx-A>
+#### 📹<a href='https://www.youtube.com/watch?v=CIuIxqUQx-A'>Video Demo</a>
 #### 🔗<a href='https://doctortime.netlify.app/'>Live Demo</a>
 
 ### 🩺 Description
