@@ -47,6 +47,7 @@ const AppContextProvider = (props) => {
       toast.error(error.message);
     }
   };
+  
   const value = {
     doctors,
     getDoctorsData,

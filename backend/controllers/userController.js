@@ -11,7 +11,7 @@ import Stripe from 'stripe'
 export const registerUser = async (req, res) => {
     try {
         const { name, email, password } = req.body
-
+console.log(req.body)
         const missingFields = []
         if (!name) missingFields.push("name")
         if (!email) missingFields.push("email")
@@ -191,10 +191,13 @@ export const listAppointment = async (req, res) => {
 // API to cancel appointment
 export const cancelappointment = async (req, res) => {
     try {
-        const { userId, appointmentId } = req.body
+        const { appointmentId } = req.body
+        const { userId } = req.user
+
         const appointmentData = await appointmentModel.findById(appointmentId)
 
         // verify appointment user
+
         if (appointmentData.userId !== userId) {
             return res.json({ success: false, message: ' Unauthorized action' })
         }

@@ -12,7 +12,7 @@ const Longin = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fullName, setFullName] = useState("");
+  const [name, setName] = useState("");
 
   // console.log(backendURL)
   const onSubmitHandler = async (event) => {
@@ -69,13 +69,13 @@ const Longin = () => {
         </p>
         {state === "singup" && (
           <div className="flex flex-col w-full">
-            <label htmlFor="fullname">Full Name:</label>
+            <label htmlFor="name">Full Name:</label>
             <input
               type="text"
-              id="fullname"
+              id="name"
               className=" border border-primary rounded w-full p-2 mt-1"
-              onChange={(e) => setFullName(e.target.value)}
-              value={fullName}
+              onChange={(e) => setName(e.target.value)}
+              value={name}
               required
             />
           </div>
